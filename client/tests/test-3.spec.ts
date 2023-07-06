@@ -18,7 +18,7 @@ test('test', async ({ page }) => {
   await page.getByLabel('Album Image Url').fill('www.google.com/logo.png');
   await page.getByLabel('YouTube ID').click();
   await page.getByLabel('YouTube ID').fill('abc1234');
-  await page.getByLabel('Tab').click();
+  await page.getByLabel('Tabas').click();
   await page.getByLabel('Tab').fill('Tab');
   await page.getByLabel('Tab').press('Tab');
   await page.getByLabel('Lyrics').fill('Ulalalalalalala');
