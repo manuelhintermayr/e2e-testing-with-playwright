@@ -2,7 +2,7 @@ import { test, expect, Page } from '@playwright/test';
 import { createSong, cleanUp, searchSong, checkTextInSongResults } from './functions';
 
 
-test('should create a bug report', async ({ request }) => {
+test('songs returning contain', async ({ request }) => {
     const issues = await request.get(`http://localhost:8081/songs`);
     expect(issues.ok()).toBeTruthy();
     expect(await issues.json()).toContainEqual(expect.objectContaining({

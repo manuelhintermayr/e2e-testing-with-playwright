@@ -11,7 +11,7 @@ test.afterEach(async ({ page }) => {
   await cleanUp(page);
 });
 
-test('test', async ({ page }) => {
+test('create new song', async ({ page }) => {
   await page.goto('http://localhost:8080/#/songs');
   await searchSong(page, newSongName);
   await checkTextInSongResults(page, 'No slot content defined.');
