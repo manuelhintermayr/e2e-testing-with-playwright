@@ -1,0 +1,20 @@
+import { test, expect, Page } from '@playwright/test';
+import { createSong, cleanUp, searchSong, checkTextInSongResults } from './functions';
+
+
+test('should create a bug report', async ({ request }) => {
+    const issues = await request.get(`http://localhost:8081/songs`);
+    expect(issues.ok()).toBeTruthy();
+    expect(await issues.json()).toContainEqual(expect.objectContaining({
+        'id': 1,
+        'title': 'Nevermind',
+        'artist': 'Nirvana',
+        'genre': 'Alternative Rock',
+        'album': 'Nevermind',
+        'albumImageUrl': 'https://is3-ssl.mzstatic.com/image/thumb/Features/d0/cc/62/dj.nanioukp.jpg/268x0w.jpg',
+        'youtubeId': 'm-ofL_3EZyE',
+        'lyrics': '',
+        'tab': '',
+        'createdAt': '2018-02-13T12:56:24.432Z',
+      }));
+  });
