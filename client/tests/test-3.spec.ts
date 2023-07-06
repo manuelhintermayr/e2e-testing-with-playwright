@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:8081/reset');
@@ -8,14 +8,7 @@ test.afterEach(async ({ page }) => {
   await page.goto('http://localhost:8081/reset');
 });
 
-
-test('test', async ({ page }) => {
-  await page.goto('http://localhost:8080/#/songs');
-  await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).click();
-  await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).fill('Cooler Song');
-  await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).press('Enter');
-  const bodyContent = await page.textContent('body');
-  expect(bodyContent.includes('No slot content defined.'), "no song was found");
+const createSong = async (page: Page) => {
   await page.getByRole('link', { name: 'add' }).click();
   await page.getByLabel('Title').click();
   await page.getByLabel('Title').fill('Cooler Song');
@@ -37,6 +30,16 @@ test('test', async ({ page }) => {
   await page.getByLabel('Tab').press('Tab');
   await page.getByLabel('Lyrics').fill('Ulalalalalalala');
   await page.getByRole('button', { name: 'Create Song' }).click();
+}
+
+test('test', async ({ page }) => {
+  await page.goto('http://localhost:8080/#/songs');
+  await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).click();
+  await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).fill('Cooler Song');
+  await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).press('Enter');
+  const bodyContent = await page.textContent('body');
+  expect(bodyContent.includes('No slot content defined.'), "no song was found");
+  await createSong(page);
   await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).click();
   await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).fill('Cooler Song');
   await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).press('Enter');
