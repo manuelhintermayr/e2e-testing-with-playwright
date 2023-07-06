@@ -1,9 +1,15 @@
 import { test, expect } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  await page.goto('http://localhost:8081/reset');
+});
+
+test.afterEach(async ({ page }) => {
+  await page.goto('http://localhost:8081/reset');
+});
 
 
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:8081/reset');
   await page.goto('http://localhost:8080/#/songs');
   await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).click();
   await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).fill('Cooler Song');
