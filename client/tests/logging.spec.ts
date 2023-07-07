@@ -17,7 +17,7 @@ test('logging songs', async ({ page }) => {
   await page.goto('http://localhost:8080/');
   await page.goto('http://localhost:8080/#/');
   await page.goto('http://localhost:8080/#/songs');
-  modifySong(page);
+  await modifySong(page);
 });
 
 test('logging images', async ({ page }) => {
