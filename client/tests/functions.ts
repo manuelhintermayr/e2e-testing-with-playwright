@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { expect, Page, Request, APIRequestContext } from '@playwright/test';
 
 export const createSong = async (page: Page, songName: string) => {
     await page.getByRole('link', { name: 'add' }).click();
@@ -35,7 +35,7 @@ export const checkTextInSongResults = async (page: Page, searchedText: string) =
     await page.getByRole('textbox', { name: 'Search by song title, artist, album, or genre' }).press('Enter');
   }
 
-export const cleanUp = async (page: Page) => {
-    await page.goto('http://localhost:8081/reset');
+export const cleanUp = async (request: APIRequestContext) => {
+    await request.get(`http://localhost:8081/reset`);
 }
   

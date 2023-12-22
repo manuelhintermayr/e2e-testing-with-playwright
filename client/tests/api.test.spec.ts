@@ -3,7 +3,6 @@ import { createSong, cleanUp, searchSong, checkTextInSongResults } from './funct
 
 
 test('songs returning contain', async ({ request }) => {
-    await request.get(`http://localhost:8081/reset`);
     // bug found
     const issues = await request.get(`http://localhost:8081/songs`);
     console.log(await issues.json());
